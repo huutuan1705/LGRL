@@ -10,8 +10,8 @@ import os
 import torch.nn.functional as F
 import math
 from torch.utils.tensorboard import SummaryWriter
-from Netwokrs_LGRL import part_att_fc,sketch_fc
-device = torch.device("cuda:0")
+from Networks_LGRL import part_att_fc,sketch_fc
+device = torch.device("cuda")
 GAMMA = 0.9
 associate_weight = 1
 tb_logdir = "./login/"

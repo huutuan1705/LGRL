@@ -7,7 +7,7 @@ import numpy as np
 from torch.distributions.multivariate_normal import MultivariateNormal
 import math
 import pickle
-from RL_Networks import part_att_fc, sketch_fc
+from Networks_LGRL import part_att_fc, sketch_fc
 device = torch.device("cuda:0")
 pi = torch.FloatTensor([math.pi]).to(device)
 
