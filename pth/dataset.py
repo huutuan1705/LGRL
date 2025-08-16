@@ -151,9 +151,9 @@ def get_dataloader(hp):
 
 def get_ransform(type):
     transform_list = []
-    if type is 'Train':
+    if type == 'Train':
         transform_list.extend([transforms.Resize(299)])
-    elif type is 'Test':
+    elif type == 'Test':
         transform_list.extend([transforms.Resize(299)])
     transform_list.extend(
         [transforms.ToTensor(), transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
@@ -161,7 +161,7 @@ def get_ransform(type):
 
 def get_part_transform(type):
     transform_list = []
-    if type is 'Train':
+    if type == 'Train':
         transform_list.extend([transforms.Resize(180), transforms.CenterCrop(170)])
     else:
         transform_list.extend([transforms.Resize(170)])
