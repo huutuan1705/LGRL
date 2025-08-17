@@ -41,10 +41,9 @@ if __name__ == "__main__":
             loss, lossp = model.train_model(batch=batch_data)
 
             # if step_count % hp.eval_freq_iter == 0:
-            # with torch.no_grad():
-            #     top1_eval, top5_eval, top10_eval = model.evaluate(
-            #         dataloader_Test)
-            #     # print('results : ', top1_eval, ' / ', top10_eval)
+            with torch.no_grad():
+                top1_eval, top5_eval, top10_eval = model.evaluate(
+                    dataloader_Test)
 
             # if top1_eval > top1:
             #     torch.save(model.sample_embedding_network.state_dict(), hp.backbone_name + '_' + hp.dataset_name + '_model_best.pth')
