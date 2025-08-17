@@ -52,7 +52,7 @@ if __name__ == "__main__":
                     torch.save(model.Linear_local.state_dict(),hp.dataset_name + '_' + str(hp.feature_num) + '_linear_local.pth')
                     torch.save(model.Linear_global.state_dict(),hp.dataset_name + '_' + str(hp.feature_num) + '_linear_global.pth')
                     top1, top5, top10 = top1_eval, top5_eval, top10_eval
-                    print('Model Updated')
+                    # print('Model Updated')
                     
         print('Epoch: {}, Top1_Accuracy: {:.5f}, Top5_Accuracy: {:.5f},Top10_Accuracy: {:.5f}'.format
                       (i_epoch, top1, top5, top10))
