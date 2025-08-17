@@ -232,7 +232,7 @@ class FGSBIR_Model(nn.Module):
         top5 = rank.le(5).sum().numpy() / rank.shape[0]
         top10 = rank.le(10).sum().numpy() / rank.shape[0]
 
-        print('Time to EValuate:{}'.format(time.time() - start_time))
+        # print('Time to EValuate:{}'.format(time.time() - start_time))
         return top1, top5, top10
     
 
