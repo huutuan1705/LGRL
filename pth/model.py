@@ -125,7 +125,7 @@ class FGSBIR_Model(nn.Module):
 
 
         # 遍历一遍
-        for i_batch, sanpled_batch in enumerate(tqdm(datloader_Test)):
+        for i_batch, sanpled_batch in enumerate(datloader_Test):
             sketch_feature, positive_feature, sample_feature_P, positive_feature_P = self.test_forward(sanpled_batch)
             Sketch_Feature_ALL.extend(sketch_feature)
 
