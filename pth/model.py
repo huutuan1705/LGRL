@@ -3,6 +3,7 @@ import torch.nn as nn
 # from Networks import InceptionV3_Network
 from Networks import InceptionV3_Network,Attention_local,Attention_global,Linear_global,Linear_local
 from torch import optim
+from tqdm import tqdm
 import torch
 import time
 import torch.nn.functional as F
@@ -124,7 +125,7 @@ class FGSBIR_Model(nn.Module):
 
 
         # 遍历一遍
-        for i_batch, sanpled_batch in enumerate(datloader_Test):
+        for i_batch, sanpled_batch in enumerate(tqdm(datloader_Test)):
             sketch_feature, positive_feature, sample_feature_P, positive_feature_P = self.test_forward(sanpled_batch)
             Sketch_Feature_ALL.extend(sketch_feature)
 

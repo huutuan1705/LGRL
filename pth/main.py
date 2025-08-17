@@ -1,6 +1,7 @@
 import argparse
 import torch
 import time
+from tqdm import tqdm
 from model import FGSBIR_Model
 from dataset import get_dataloader
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -34,21 +35,21 @@ if __name__ == "__main__":
     step_count, top1, top5, top10 = -1, 0, 0, 0
 
     for i_epoch in range(hp.max_epoch):
-        for batch_data in dataloader_Train:
+        for _, batch_data in enumerate(tqdm(dataloader_Train, dynamic_ncols=False)):
             step_count = step_count + 1
             start = time.time()
             model.train()
             loss, lossp = model.train_model(batch=batch_data)
 
-            if step_count % hp.print_freq_iter == 0:
-                print('Epoch: {}, Iteration: {}, Loss: {:.5f}, Lossp: {:.5f},Top1_Accuracy: {:.5f}, Top5_Accuracy: {:.5f},Top10_Accuracy: {:.5f}, Time: {}'.format
-                      (i_epoch, step_count, loss, lossp, top1, top5, top10, time.time()-start))
+            # if step_count % hp.print_freq_iter == 0:
+            #     print('Epoch: {}, Iteration: {}, Loss: {:.5f}, Lossp: {:.5f},Top1_Accuracy: {:.5f}, Top5_Accuracy: {:.5f},Top10_Accuracy: {:.5f}, Time: {}'.format
+            #           (i_epoch, step_count, loss, lossp, top1, top5, top10, time.time()-start))
 
             if step_count % hp.eval_freq_iter == 0:
                 with torch.no_grad():
                     top1_eval, top5_eval, top10_eval = model.evaluate(
                         dataloader_Test)
-                    print('results : ', top1_eval, ' / ', top10_eval)
+                    # print('results : ', top1_eval, ' / ', top10_eval)
 
                 if top1_eval > top1:
                     torch.save(model.sample_embedding_network.state_dict(), hp.backbone_name + '_' + hp.dataset_name + '_model_best.pth')
@@ -57,4 +58,7 @@ if __name__ == "__main__":
                     torch.save(model.Linear_local.state_dict(),hp.dataset_name + '_' + str(hp.feature_num) + '_linear_local.pth')
                     torch.save(model.Linear_global.state_dict(),hp.dataset_name + '_' + str(hp.feature_num) + '_linear_global.pth')
                     top1, top5, top10 = top1_eval, top5_eval, top10_eval
-                    print('Model Updated')
+                    # print('Model Updated')
+                    
+        print('Epoch: {}, Top1_Accuracy: {:.5f}, Top5_Accuracy: {:.5f},Top10_Accuracy: {:.5f}'.format
+                      (i_epoch, top1, top5, top10))
