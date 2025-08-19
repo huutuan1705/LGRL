@@ -55,4 +55,4 @@ if __name__ == "__main__":
             # print('Model Updated')
                     
         print('Epoch: {}, Top1_Accuracy: {:.5f}, Top5_Accuracy: {:.5f},Top10_Accuracy: {:.5f}'.format
-                      (i_epoch, top1, top5, top10))
+                      (i_epoch, top1_eval, top5_eval, top10_eval))
